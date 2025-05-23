@@ -1,0 +1,3 @@
+PySide6
+SQLAlchemy
+psycopg2-binary
