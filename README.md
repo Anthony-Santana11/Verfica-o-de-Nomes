@@ -1,12 +1,24 @@
-# Validador de Nomes de Pastas
+# Validador de Nomes de Pastas para Cartórios
 
-O Validador de Nomes de Pastas é uma aplicação desktop desenvolvida em Python para análise, sugestão e padronização de nomes de pastas, utilizando listas de nomes e sobrenomes padrão. O sistema conta com interface gráfica moderna, integração com banco de dados PostgreSQL e correção automática de erros comuns de digitação.
+Este projeto foi desenvolvido para **validação e padronização de nomes de pastas de casamentos em cartórios**. O objetivo é garantir que os nomes das pastas, que representam registros de casamentos, estejam corretos, padronizados e sem erros de digitação, facilitando a organização, busca e integridade dos arquivos digitais do cartório.
+
+A aplicação utiliza listas de nomes e sobrenomes padrão, além de fuzzy matching para sugerir correções automáticas. Nomes e sobrenomes não encontrados são automaticamente adicionados à base padrão, tornando o sistema cada vez mais completo conforme o uso.
+
+A interface gráfica permite que operadores do cartório analisem rapidamente grandes volumes de pastas, visualizem sugestões de correção e mantenham o banco de dados sempre atualizado, tudo integrado a um banco de dados PostgreSQL robusto e seguro.
+
+---
+
+## Contexto de Uso
+
+- **Cartórios de registro civil** frequentemente digitalizam e organizam documentos de casamento em pastas nomeadas com o nome dos noivos.
+- Erros de digitação, variações e falta de padronização dificultam buscas, auditorias e integrações com sistemas eletrônicos.
+- Este sistema automatiza a validação, sugere correções e aprende com novos nomes, tornando o processo mais eficiente e confiável.
 
 ---
 
 ## Funcionalidades
 
-- Análise automática dos nomes das subpastas de um diretório.
+- Análise automática dos nomes das subpastas de um diretório de casamentos.
 - Sugestão inteligente de nomes e sobrenomes corrigidos, com base em listas padrão.
 - Correção automática de erros comuns de digitação (fuzzy matching).
 - Aprendizado contínuo: nomes e sobrenomes não encontrados são adicionados automaticamente à base padrão.
