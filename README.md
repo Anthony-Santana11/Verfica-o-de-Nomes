@@ -1,110 +1,104 @@
 # Validador de Nomes de Pastas
 
-Este projeto é uma aplicação desktop em Python para **análise, sugestão e padronização de nomes de pastas** com base em listas de nomes e sobrenomes padrão, utilizando interface gráfica (PySide6), banco de dados relacional (SQLAlchemy/SQLite) e fuzzy matching (RapidFuzz).
+O Validador de Nomes de Pastas é uma aplicação desktop desenvolvida em Python para análise, sugestão e padronização de nomes de pastas, utilizando listas de nomes e sobrenomes padrão. O sistema conta com interface gráfica moderna, integração com banco de dados PostgreSQL e correção automática de erros comuns de digitação.
 
 ---
 
 ## Funcionalidades
 
-- Seleção de uma pasta para análise automática dos nomes das subpastas.
-- Sugestão automática de nomes e sobrenomes corrigidos, conforme listas padrão.
+- Análise automática dos nomes das subpastas de um diretório.
+- Sugestão inteligente de nomes e sobrenomes corrigidos, com base em listas padrão.
 - Correção automática de erros comuns de digitação (fuzzy matching).
-- Adição automática de nomes/sobrenomes não encontrados à lista padrão.
-- Interface visual moderna com tema escuro.
-- Visualização e atualização dos registros no banco de dados.
-- Adição manual de nomes/sobrenomes padrão pela interface.
-- Migrações de banco de dados utilizando **Alembic**.
+- Aprendizado contínuo: nomes e sobrenomes não encontrados são adicionados automaticamente à base padrão.
+- Interface gráfica intuitiva e responsiva (PySide6 com tema escuro).
+- Visualização e atualização dos registros diretamente na interface.
+- Adição manual de nomes/sobrenomes padrão.
+- Migrações de banco de dados com Alembic.
+- Compatível com Windows e fácil de empacotar como executável.
 
 ---
 
 ## Tecnologias Utilizadas
 
-- **Python 3.10+**
-- **PySide6**  
-  Interface gráfica moderna baseada em Qt.
-- **SQLAlchemy**  
-  ORM para manipulação do banco de dados relacional (SQLite por padrão).
-- **Alembic**  
-  Ferramenta para controle de versões e migrações do banco de dados.
-- **RapidFuzz**  
-  Biblioteca para fuzzy matching (correção de nomes/sobrenomes com erros de digitação).
-- **qdarkstyle**  
-  Tema escuro para aplicações Qt.
-- **SQLite**  
-  Banco de dados local, leve e fácil de distribuir.
-- **PyInstaller**  
-  (Opcional) Para empacotar o programa como executável (.exe) para Windows.
+- Python 3.10+
+- PySide6 — Interface gráfica baseada em Qt.
+- SQLAlchemy — ORM para PostgreSQL.
+- Alembic — Migrações e versionamento do banco de dados.
+- RapidFuzz — Fuzzy matching para sugestões inteligentes.
+- qdarkstyle — Tema escuro para aplicações Qt.
+- PostgreSQL — Banco de dados relacional.
+- psycopg2-binary — Driver de conexão Python/PostgreSQL.
+- PyInstaller — (Opcional) Empacotamento para executável Windows.
 
 ---
 
-## Instalação
+## Instalação e Configuração
 
-1. **Clone o repositório:**
-   ```
-   git clone https://github.com/seu-usuario/seu-repo.git
-   cd seu-repo
-   ```
+### 1. Clone o repositório
 
-2. **Crie um ambiente virtual (opcional, mas recomendado):**
-   ```
-   python -m venv venv
-   venv\Scripts\activate
-   ```
-
-3. **Instale as dependências:**
-   ```
-   pip install -r requirements.txt
-   ```
-
-   Exemplo de `requirements.txt`:
-   ```
-   PySide6
-   SQLAlchemy
-   alembic
-   rapidfuzz
-   qdarkstyle
-   ```
-
----
-
-## Migrações de Banco de Dados (Alembic)
-
-O projeto utiliza o **Alembic** para versionamento e migração do banco de dados.  
-Para criar ou atualizar o banco:
-
-1. **Inicialize o Alembic (se ainda não existir):**
-   ```
-   alembic init alembic
-   ```
-
-2. **Crie uma nova revisão de migração:**
-   ```
-   alembic revision --autogenerate -m "Descrição da mudança"
-   ```
-
-3. **Aplicar as migrações:**
-   ```
-   alembic upgrade head
-   ```
-
-O arquivo de conexão do banco deve estar configurado em `alembic.ini` (exemplo para SQLite):
+```bash
+git clone https://github.com/seu-usuario/seu-repo.git
+cd seu-repo
 ```
-sqlalchemy.url = sqlite:///./nomes.db
+
+### 2. Crie e ative um ambiente virtual (opcional)
+
+```bash
+python -m venv venv
+venv\Scripts\activate
 ```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+Exemplo de `requirements.txt`:
+```
+PySide6
+SQLAlchemy
+alembic
+rapidfuzz
+qdarkstyle
+psycopg2-binary
+```
+
+### 4. Configure o banco de dados PostgreSQL
+
+- Crie o banco:
+  ```bash
+  createdb nomes_pasta
+  ```
+- No arquivo `db/db.py`, ajuste a string de conexão conforme seu ambiente:
+  ```python
+  DATABASE_URL = "postgresql://usuario:senha@localhost:5432/nomes_pasta?client_encoding=utf8"
+  ```
+  Substitua `usuario` e `senha` pelos seus dados.
+
+### 5. Migrações com Alembic
+
+- Configure o arquivo `alembic.ini`:
+  ```
+  sqlalchemy.url = postgresql://usuario:senha@localhost:5432/nomes_pasta?client_encoding=utf8
+  ```
+- Para criar as tabelas/migrar:
+  ```bash
+  alembic upgrade head
+  ```
 
 ---
 
 ## Como Usar
 
-1. **Execute o programa:**
-   ```
+1. Execute o programa:
+   ```bash
    python main.py
    ```
-
-2. **Na interface:**
-   - Clique em **Selecionar Pasta para Análise** para escolher uma pasta e analisar os nomes das subpastas.
+2. Na interface:
+   - Clique em "Selecionar Pasta para Análise" para escolher um diretório e analisar os nomes das subpastas.
    - Veja as sugestões de correção na lista e na tabela.
-   - Para adicionar manualmente um nome ou sobrenome padrão, clique em **Adicionar Nome/Sobrenome Padrão**.
+   - Para adicionar manualmente um nome ou sobrenome padrão, clique em "Adicionar Nome/Sobrenome Padrão".
 
 ---
 
@@ -128,26 +122,27 @@ projeto-bancodedados/
 
 ---
 
-## Gerando Executável (.exe)
-
-1. Instale o PyInstaller:
-   ```
-   pip install pyinstaller
-   ```
-2. Gere o executável:
-   ```
-   pyinstaller --noconfirm --onefile --windowed --add-data "icons;icons" main.py
-   ```
-   O executável estará na pasta `dist/`.
-
----
-
 ## Observações
 
-- O banco de dados é criado automaticamente na primeira execução.
+- O banco de dados PostgreSQL deve estar rodando e acessível.
 - Nomes e sobrenomes não encontrados na lista padrão são adicionados automaticamente para futuras correções.
 - Para adicionar mais nomes/sobrenomes padrão, edite a função `inserir_nomes_e_sobrenomes_padrao_na_nomes_pasta()` em `main.py`.
 - O Alembic permite evoluir o banco de dados sem perder dados já cadastrados.
+- O sistema é facilmente adaptável para outros bancos suportados pelo SQLAlchemy.
+
+---
+
+## Gerando Executável para Windows
+
+1. Instale o PyInstaller:
+   ```bash
+   pip install pyinstaller
+   ```
+2. Gere o executável:
+   ```bash
+   pyinstaller --noconfirm --onefile --windowed --add-data "icons;icons" main.py
+   ```
+   O executável estará na pasta `dist/`.
 
 ---
 
@@ -156,3 +151,8 @@ projeto-bancodedados/
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
+
+## Contribuição
+
+Sugestões, correções e melhorias são bem-vindas.  
+Abra uma issue ou envie um pull request para contribuir com o projeto.
